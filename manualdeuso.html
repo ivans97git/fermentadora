@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fermentadora</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "nav    main"
+                "footer footer";
+            grid-template-rows: 80px 1fr 60px;
+            grid-template-columns: 250px 1fr;
+            font-family: Arial, sans-serif;
+        }
+        
+        header {
+            grid-area: header;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+         header {
+            grid-area: header;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .titulo-principal {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .estado-conexion {
+            font-size: 14px;
+            color: #4CAF50; /* Verde para indicar conexión */
+            font-weight: bold;
+        }
+        nav {
+            grid-area: nav;
+            background-color: #f4f4f4;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        /* Estilos para el menú de navegación */
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu li {
+            margin-bottom: 10px;
+        }
+        
+        .menu a {
+            display: block;
+            padding: 10px 15px;
+            background-color: #e0e0e0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu a:hover {
+            background-color: #d0d0d0;
+            color: #000;
+        }
+        
+        .menu a.active {
+            background-color: #333;
+            color: white;
+        }
+        
+        main {
+            grid-area: main;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+                        
+        footer {
+            grid-area: footer;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            gap: 5px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-icon {
+            font-size: 14px;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        /* Estilos para el botón de descarga */
+        .download-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+
+        .download-icon {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="titulo-principal">FERMENTADORA</div>
+        <div class="estado-conexion">CONECTADO</div>
+    </header>  
+    <nav>
+        <ul class="menu">
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="configuración.html">Configuración</a></li>
+            <li><a href="manualdeuso.html" class="active">Manual de uso</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>MANUAL DE USO</h2>
+        <p>Descargue el manual completo de usuario con todas las instrucciones para el correcto funcionamiento de la fermentadora:</p>
+        
+        <div class="download-section">
+            <a href="https://ejemplo.com/manual-fermentadora.pdf" class="download-btn" download>
+                <span class="download-icon">↓</span> Descargar el archivo
+            </a>
+            <p style="margin-top: 10px; color: #666; font-size: 14px;">Formato PDF - Tamaño: 2.4 MB</p>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <span class="contact-icon">✉</span>
+                <a href="mailto:contacto@fermentadora.com" style="color: white; text-decoration: none;">contacto@fermentadora.com</a>
+            </div>
+            <div class="contact-info">
+                <span class="contact-icon">📱</span>
+                <a href="https://wa.me/521234567890" style="color: white; text-decoration: none;">+52 123 456 7890</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

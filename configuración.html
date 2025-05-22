@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fermentadora</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "nav    main"
+                "footer footer";
+            grid-template-rows: 80px 1fr 60px;
+            grid-template-columns: 250px 1fr;
+            font-family: Arial, sans-serif;
+        }
+        
+        header {
+            grid-area: header;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+         header {
+            grid-area: header;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .titulo-principal {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .estado-conexion {
+            font-size: 14px;
+            color: #4CAF50; /* Verde para indicar conexión */
+            font-weight: bold;
+        }
+        nav {
+            grid-area: nav;
+            background-color: #f4f4f4;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu li {
+            margin-bottom: 10px;
+        }
+        
+        .menu a {
+            display: block;
+            padding: 10px 15px;
+            background-color: #e0e0e0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu a:hover {
+            background-color: #d0d0d0;
+            color: #000;
+        }
+        
+        .menu a.active {
+            background-color: #333;
+            color: white;
+        }
+        
+        main {
+            grid-area: main;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+                        
+        footer {
+            grid-area: footer;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .config-panel {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .control-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .range-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button-primary:hover {
+            background-color: #45a049;
+        }
+
+        .button-secondary {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .button-secondary:hover {
+            background-color: #d32f2f;
+        }
+        
+        .time-display {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+            font-style: italic;
+        }
+         .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-icon {
+            font-size: 14px;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="titulo-principal">FERMENTADORA</div>
+        <div class="estado-conexion">CONECTADO</div>
+    </header>  
+    <nav>
+        <ul class="menu">
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="configuración.html" class="active">Configuración</a></li>
+            <li><a href="manualdeuso.html">Manual de uso</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>CONFIGURACIÓN</h2>
+        <p>Seleccione los parámetros de funcionamiento que desee para la máquina.</p>
+        
+        <div class="config-panel">
+            <div class="control-group">
+                <label for="temperatura">Temperatura (°C)</label>
+                <input type="number" id="temperatura" min="10" max="40" step="0.5" value="22.5">
+                <div class="range-info">
+                    <span>Mín: 10°C</span>
+                    <span>Máx: 40°C</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label for="humedad">Humedad Relativa (%)</label>
+                <input type="number" id="humedad" min="30" max="90" step="1" value="65">
+                <div class="range-info">
+                    <span>Mín: 30%</span>
+                    <span>Máx: 90%</span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label for="tiempo">Tiempo de Operación (minutos)</label>
+                <input type="number" id="tiempo" min="15" max="4320" step="15" value="1440">
+                <div class="range-info">
+                    <span>Mín: 15 min</span>
+                    <span>Máx: 3 días (4320 min)</span>
+                </div>
+                <div class="time-display" id="time-display">Equivalente: 24 horas</div>
+            </div>
+            
+            <div class="button-group">
+                <button class="button button-primary" id="cargar">Cargar</button>
+                <button class="button button-secondary" id="borrar">Borrar</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+            <div class="footer-content">
+            <div class="contact-info">
+                <span class="contact-icon">✉</span>
+                <a href="mailto:contacto@fermentadora.com" style="color: white; text-decoration: none;">contacto@fermentadora.com</a>
+            </div>
+            <div class="contact-info">
+                <span class="contact-icon">📱</span>
+                <a href="https://wa.me/521234567890" style="color: white; text-decoration: none;">+52 123 456 7890</a>
+            </div>
+            </div>
+    </footer>
+
+    <script>
+        // Valores por defecto
+        const valoresPorDefecto = {
+            temperatura: 22.5,
+            humedad: 65,
+            tiempo: 1440 // 24 horas en minutos
+        };
+
+        // Función para convertir minutos a formato legible
+        function formatMinutes(minutes) {
+            const days = Math.floor(minutes / 1440);
+            const hours = Math.floor((minutes % 1440) / 60);
+            const mins = minutes % 60;
+            
+            let result = [];
+            if (days > 0) result.push(`${days} día${days > 1 ? 's' : ''}`);
+            if (hours > 0) result.push(`${hours} hora${hours > 1 ? 's' : ''}`);
+            if (mins > 0 || result.length === 0) result.push(`${mins} minuto${mins !== 1 ? 's' : ''}`);
+            
+            return result.join(' ');
+        }
+
+        // Actualizar display de tiempo
+        function updateTimeDisplay() {
+            const minutes = parseInt(document.getElementById('tiempo').value) || 0;
+            document.getElementById('time-display').textContent = `Equivalente: ${formatMinutes(minutes)}`;
+        }
+
+        // Inicializar display de tiempo
+        updateTimeDisplay();
+
+        // Escuchar cambios en el input de tiempo
+        document.getElementById('tiempo').addEventListener('input', updateTimeDisplay);
+
+        // Botón Borrar
+        document.getElementById('borrar').addEventListener('click', function() {
+            document.getElementById('temperatura').value = valoresPorDefecto.temperatura;
+            document.getElementById('humedad').value = valoresPorDefecto.humedad;
+            document.getElementById('tiempo').value = valoresPorDefecto.tiempo;
+            updateTimeDisplay();
+            alert('Valores restablecidos a los predeterminados');
+        });
+
+        // Botón Cargar
+        document.getElementById('cargar').addEventListener('click', function() {
+            const temperatura = document.getElementById('temperatura').value;
+            const humedad = document.getElementById('humedad').value;
+            const minutos = document.getElementById('tiempo').value;
+            
+            // Aquí iría la lógica para enviar estos valores al sistema
+            alert(`Configuración cargada:\nTemperatura: ${temperatura}°C\nHumedad: ${humedad}%\nTiempo: ${formatMinutes(minutos)}`);
+        });
+    </script>
+</body>
+</html>
