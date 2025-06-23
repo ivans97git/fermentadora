@@ -6,7 +6,6 @@ const topic = "casa/dht11";
 // Elementos del DOM
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
-const porcetajeNivelElement = document.getElementById("porcentajeNivel");
 
 
 // Cliente MQTT
