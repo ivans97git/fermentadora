@@ -23,17 +23,6 @@
             color: white;
             padding: 10px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-         header {
-            grid-area: header;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -47,9 +36,10 @@
 
         .estado-conexion {
             font-size: 14px;
-            color: #4CAF50; /* Verde para indicar conexión */
+            color: #4CAF50;
             font-weight: bold;
         }
+        
         nav {
             grid-area: nav;
             background-color: #f4f4f4;
@@ -92,6 +82,9 @@
             padding: 20px;
             overflow-y: auto;
             background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
                         
         footer {
@@ -111,8 +104,65 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-top: 20px;
             max-width: 600px;
+        }
+
+        /* Estilos para el panel de último valor cargado */
+        .ultimo-valor-panel {
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+
+        .ultimo-valor-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2e7d32;
+            border-bottom: 1px solid #c8e6c9;
+            padding-bottom: 5px;
+        }
+
+        .ultimo-valor-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .ultimo-valor-item {
+            background-color: white;
+            border-radius: 6px;
+            padding: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .ultimo-valor-label {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .ultimo-valor-dato {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .ultimo-valor-fecha {
+            font-size: 12px;
+            color: #777;
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .no-valor {
+            font-style: italic;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            grid-column: 1 / -1;
         }
 
         .control-group {
@@ -181,7 +231,8 @@
             margin-top: 5px;
             font-style: italic;
         }
-         .footer-content {
+        
+        .footer-content {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -196,10 +247,6 @@
 
         .contact-icon {
             font-size: 14px;
-        }
-
-        .status {
-            font-weight: bold;
         }
     </style>
 </head>
@@ -253,9 +300,17 @@
                 <button class="button button-secondary" id="borrar">Borrar</button>
             </div>
         </div>
+
+        <!-- Panel para mostrar el último valor cargado -->
+        <div class="ultimo-valor-panel" id="ultimo-valor-panel">
+            <div class="ultimo-valor-title">Última Configuración Cargada</div>
+            <div class="ultimo-valor-content" id="ultimo-valor-content">
+                <div class="no-valor">No se han cargado valores aún</div>
+            </div>
+        </div>
     </main>
     <footer>
-            <div class="footer-content">
+        <div class="footer-content">
             <div class="contact-info">
                 <span class="contact-icon">✉</span>
                 <a href="mailto:contacto@fermentadora.com" style="color: white; text-decoration: none;">contacto@fermentadora.com</a>
@@ -264,7 +319,7 @@
                 <span class="contact-icon">📱</span>
                 <a href="https://wa.me/521234567890" style="color: white; text-decoration: none;">+52 123 456 7890</a>
             </div>
-            </div>
+        </div>
     </footer>
 
     <script>
@@ -274,6 +329,9 @@
             humedad: 65,
             tiempo: 1440 // 24 horas en minutos
         };
+
+        // Variable para almacenar el último valor cargado
+        let ultimoValorCargado = JSON.parse(localStorage.getItem('ultimoValorFermentadora')) || null;
 
         // Función para convertir minutos a formato legible
         function formatMinutes(minutes) {
@@ -289,14 +347,55 @@
             return result.join(' ');
         }
 
+        // Función para formatear fecha
+        function formatFecha(fecha) {
+            const opciones = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return fecha.toLocaleDateString('es-ES', opciones);
+        }
+
         // Actualizar display de tiempo
         function updateTimeDisplay() {
             const minutes = parseInt(document.getElementById('tiempo').value) || 0;
             document.getElementById('time-display').textContent = `Equivalente: ${formatMinutes(minutes)}`;
         }
 
-        // Inicializar display de tiempo
+        // Mostrar último valor cargado
+        function mostrarUltimoValor() {
+            const container = document.getElementById('ultimo-valor-content');
+            
+            if (!ultimoValorCargado) {
+                container.innerHTML = '<div class="no-valor">No se han cargado valores aún</div>';
+                return;
+            }
+            
+            const fecha = new Date(ultimoValorCargado.fecha);
+            
+            container.innerHTML = `
+                <div class="ultimo-valor-item">
+                    <div class="ultimo-valor-label">Temperatura</div>
+                    <div class="ultimo-valor-dato">${ultimoValorCargado.temperatura}°C</div>
+                </div>
+                <div class="ultimo-valor-item">
+                    <div class="ultimo-valor-label">Humedad</div>
+                    <div class="ultimo-valor-dato">${ultimoValorCargado.humedad}%</div>
+                </div>
+                <div class="ultimo-valor-item">
+                    <div class="ultimo-valor-label">Tiempo</div>
+                    <div class="ultimo-valor-dato">${formatMinutes(ultimoValorCargado.tiempo)}</div>
+                </div>
+                <div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
+            `;
+        }
+
+        // Inicializar display de tiempo y mostrar último valor
         updateTimeDisplay();
+        mostrarUltimoValor();
 
         // Escuchar cambios en el input de tiempo
         document.getElementById('tiempo').addEventListener('input', updateTimeDisplay);
@@ -312,12 +411,32 @@
 
         // Botón Cargar
         document.getElementById('cargar').addEventListener('click', function() {
-            const temperatura = document.getElementById('temperatura').value;
-            const humedad = document.getElementById('humedad').value;
-            const minutos = document.getElementById('tiempo').value;
+            const temperatura = parseFloat(document.getElementById('temperatura').value);
+            const humedad = parseInt(document.getElementById('humedad').value);
+            const minutos = parseInt(document.getElementById('tiempo').value);
             
-            // Aquí iría la lógica para enviar estos valores al sistema
+            // Validar valores
+            if (isNaN(temperatura) || isNaN(humedad) || isNaN(minutos)) {
+                alert('Por favor ingrese valores válidos');
+                return;
+            }
+            
+            // Crear nuevo objeto con los valores
+            ultimoValorCargado = {
+                temperatura: temperatura,
+                humedad: humedad,
+                tiempo: minutos,
+                fecha: new Date().toISOString()
+            };
+            
+            // Guardar en localStorage
+            localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
+            
+            // Mostrar confirmación
             alert(`Configuración cargada:\nTemperatura: ${temperatura}°C\nHumedad: ${humedad}%\nTiempo: ${formatMinutes(minutos)}`);
+            
+            // Actualizar panel de último valor
+            mostrarUltimoValor();
         });
     </script>
 </body>
