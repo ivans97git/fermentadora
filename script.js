@@ -22,11 +22,10 @@ const client = new Paho.Client(broker, port, clientId);
 function checkConnection() {
     const currentTime = Date.now();
     if (currentTime - lastMessageTime > timeoutDuration) {
-        wifiElement.textContent = "desconectada";
-        // Opcional: también podrías limpiar los otros valores
-        // temperatureElement.textContent = "--";
-        // humidityElement.textContent = "--";
-        // nivelAguaElement.textContent = "--";
+        wifiElement.textContent = "desconectada";        
+        temperatureElement.textContent = "--";
+        humidityElement.textContent = "--";
+        nivelAguaElement.textContent = "--";
     }
 }
 
