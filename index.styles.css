@@ -28,24 +28,13 @@ header {
     font-weight: bold;
     margin-bottom: 5px;
 }
-/*
+
 .estado-conexion {
     font-size: 14px;
     color: #4CAF50; 
     font-weight: bold;
 }
-*/
-.estado-conexion-active {
-    font-size: 14px;
-    color: #4CAF50;
-    font-weight: bold;
-} 
-
-.estado-conexion-desactive {
-    font-size: 14px;
-    color: #d32f2f;
-    font-weight: bold;
-}    
+   
 nav {
     grid-area: nav;
     background-color: #f4f4f4;
