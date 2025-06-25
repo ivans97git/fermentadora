@@ -3,11 +3,15 @@
 <head>
     <title>Fermentadora</title>
     <link rel="stylesheet" href="manualdeuso.styles.css">
+    <!-- Carga Paho MQTT primero -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js"></script>
+    <!-- Luego tu script, con defer para esperar a que el DOM esté listo -->
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
         <div class="titulo-principal">FERMENTADORA</div>
-        <div class="estado-conexion">CONECTADO</div>
+        <div class="estado-conexion"id="wifi"></div>
     </header>  
     <nav>
         <ul class="menu">
