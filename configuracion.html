@@ -88,6 +88,11 @@
         // Variable para almacenar el último valor cargado
         let ultimoValorCargado = JSON.parse(localStorage.getItem('ultimoValorFermentadora')) || null;
 
+        // Variables globales para los valores de configuración
+        let configTemperatura = valoresPorDefecto.temperatura;
+        let configHumedad = valoresPorDefecto.humedad;
+        let configTiempo = valoresPorDefecto.tiempo;
+
         // Función para convertir minutos a formato legible
         function formatMinutes(minutes) {
             const days = Math.floor(minutes / 1440);
@@ -148,6 +153,19 @@
             `;
         }
 
+        // Función para actualizar las variables de configuración
+        function actualizarVariablesConfiguracion() {
+            configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
+            configHumedad = parseInt(document.getElementById('humedad').value) || valoresPorDefecto.humedad;
+            configTiempo = parseInt(document.getElementById('tiempo').value) || valoresPorDefecto.tiempo;
+            
+            console.log('Variables actualizadas:', {
+                temperatura: configTemperatura,
+                humedad: configHumedad,
+                tiempo: configTiempo
+            });
+        }
+
         // Inicializar display de tiempo y mostrar último valor
         updateTimeDisplay();
         mostrarUltimoValor();
@@ -161,26 +179,20 @@
             document.getElementById('humedad').value = valoresPorDefecto.humedad;
             document.getElementById('tiempo').value = valoresPorDefecto.tiempo;
             updateTimeDisplay();
+            actualizarVariablesConfiguracion(); // Actualizar variables al borrar
             alert('Valores restablecidos a los predeterminados');
         });
 
         // Botón Cargar
         document.getElementById('cargar').addEventListener('click', function() {
-            const temperatura = parseFloat(document.getElementById('temperatura').value);
-            const humedad = parseInt(document.getElementById('humedad').value);
-            const minutos = parseInt(document.getElementById('tiempo').value);
-            
-            // Validar valores
-            if (isNaN(temperatura) || isNaN(humedad) || isNaN(minutos)) {
-                alert('Por favor ingrese valores válidos');
-                return;
-            }
+            // Actualizar las variables primero
+            actualizarVariablesConfiguracion();
             
             // Crear nuevo objeto con los valores
             ultimoValorCargado = {
-                temperatura: temperatura,
-                humedad: humedad,
-                tiempo: minutos,
+                temperatura: configTemperatura,
+                humedad: configHumedad,
+                tiempo: configTiempo,
                 fecha: new Date().toISOString()
             };
             
@@ -188,11 +200,24 @@
             localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
             
             // Mostrar confirmación
-            alert(`Configuración cargada:\nTemperatura: ${temperatura}°C\nHumedad: ${humedad}%\nTiempo: ${formatMinutes(minutos)}`);
+            alert(`Configuración cargada:\nTemperatura: ${configTemperatura}°C\nHumedad: ${configHumedad}%\nTiempo: ${formatMinutes(configTiempo)}`);
             
             // Actualizar panel de último valor
             mostrarUltimoValor();
+            
+            // Aquí puedes usar las variables configTemperatura, configHumedad y configTiempo
+            // para enviarlas a tu backend o hacer lo que necesites con ellas
+            console.log('Configuración cargada:', {
+                temperatura: configTemperatura,
+                humedad: configHumedad,
+                tiempo: configTiempo
+            });
         });
+
+        // También puedes llamar a actualizarVariablesConfiguracion() cuando cambie cualquier campo
+        document.getElementById('temperatura').addEventListener('change', actualizarVariablesConfiguracion);
+        document.getElementById('humedad').addEventListener('change', actualizarVariablesConfiguracion);
+        document.getElementById('tiempo').addEventListener('change', actualizarVariablesConfiguracion);
     </script>
 </body>
 </html>
