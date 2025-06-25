@@ -34,9 +34,14 @@ header {
     color: #4CAF50; /* Verde para indicar conexión */
     font-weight: bold;
 }
+
+.estado-conexion.active {
+    color: #4CAF50;
+} 
+
 .estado-conexion.desactive {
     color: #d32f2f;
-    
+}    
 nav {
     grid-area: nav;
     background-color: #f4f4f4;
