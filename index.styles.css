@@ -35,7 +35,7 @@ header {
     font-weight: bold;
 }
 .estado-conexion.desactive {
-    color: white;
+    color: #d32f2f;
     
 nav {
     grid-area: nav;
