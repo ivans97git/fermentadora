@@ -5,7 +5,6 @@ const topic = "casa/sensores";
 
 // Elementos del DOM
 const wifiElement = document.getElementById("wifi");
-const conexElement = document.getElementsId("conex");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
@@ -23,8 +22,8 @@ const client = new Paho.Client(broker, port, clientId);
 function checkConnection() {
     const currentTime = Date.now();
     if (currentTime - lastMessageTime > timeoutDuration) {
-        wifiElement.textContent = "DESCONECTADA";   
-        conexElement.textContent = "estado-conexion-desactive";  
+        wifiElement.textContent = "DESCONECTADA";  
+        wifiElement.style.color = "#F44336" 
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
@@ -35,7 +34,7 @@ function checkConnection() {
 client.onConnectionLost = (response) => {
     console.error("Conexión perdida:", response.errorMessage);
     wifiElement.textContent = "DESCONECTADA";
-    conexElement.textContent = "estado-conexion-desactive";
+    wifiElement.style.color = "#F44336"
     temperatureElement.textContent = "--";
     humidityElement.textContent = "--";
     nivelAguaElement.textContent = "--";
@@ -47,7 +46,7 @@ client.onMessageArrived = (message) => {
     try {
         const data = JSON.parse(message.payloadString);
         wifiElement.textContent = data.wifi || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-        conexElement.textContent = "estado-conexion-active";
+        wifiElement.style.color = "#4CAF50";
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
@@ -75,7 +74,7 @@ const options = {
     onFailure: (error) => {
         console.error("Error de conexión:", error.errorMessage);
         wifiElement.textContent = "DESCONECTADA";
-        conexElement.textContent = "estado-conexion-desactive";
+        wifiElement.style.color = "#F44336"
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
