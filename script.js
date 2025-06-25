@@ -1,12 +1,13 @@
 // Configuración MQTT (HiveMQ Cloud)
 const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud"; // Cambia por tu broker
 const port = 8884; // Puerto para WebSocket (SSL)
-const topic = "casa/dht11";
+const topic = "casa/sensores";
 
 // Elementos del DOM
+const ewifiElement = document.getElementById("ewifi");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
-
+const nivelAguaElement = document.getElementById("nivelAgua");
 
 // Cliente MQTT
 const clientId = "web_" + parseInt(Math.random() * 100, 10);
@@ -21,8 +22,10 @@ client.onConnectionLost = (response) => {
 client.onMessageArrived = (message) => {
     try {
         const data = JSON.parse(message.payloadString);
+        ewifiElement.textContent = data.ewifi;
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
+        nivelAguaElement.textContent = data.nivelAgua;
         console.log("Datos actualizados:", data);
     } catch (error) {
         console.error("Error al procesar mensaje:", error);
