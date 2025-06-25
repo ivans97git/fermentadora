@@ -24,7 +24,7 @@ function checkConnection() {
     const currentTime = Date.now();
     if (currentTime - lastMessageTime > timeoutDuration) {
         wifiElement.textContent = "DESCONECTADA";   
-        conexElement.textContent = "estado-conexion-activa";  
+        conexElement.textContent = "estado-conexion-desactive";  
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
@@ -35,7 +35,7 @@ function checkConnection() {
 client.onConnectionLost = (response) => {
     console.error("Conexión perdida:", response.errorMessage);
     wifiElement.textContent = "DESCONECTADA";
-    conexElement.textContent = "estado-conexion-activa";
+    conexElement.textContent = "estado-conexion-desactive";
     temperatureElement.textContent = "--";
     humidityElement.textContent = "--";
     nivelAguaElement.textContent = "--";
@@ -47,6 +47,7 @@ client.onMessageArrived = (message) => {
     try {
         const data = JSON.parse(message.payloadString);
         wifiElement.textContent = data.wifi || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
+        conexElement.textContent = "estado-conexion-active";
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
@@ -73,7 +74,11 @@ const options = {
     },
     onFailure: (error) => {
         console.error("Error de conexión:", error.errorMessage);
-        wifiElement.textContent = "desconectada";
+        wifiElement.textContent = "DESCONECTADA";
+        conexElement.textContent = "estado-conexion-desactive";
+        temperatureElement.textContent = "--";
+        humidityElement.textContent = "--";
+        nivelAguaElement.textContent = "--";
     }
 };
 
