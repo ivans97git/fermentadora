@@ -5,6 +5,7 @@ const topic = "casa/sensores";
 
 // Elementos del DOM
 const wifiElement = document.getElementById("wifi");
+const conexElement = document.getElementByClassName("conex");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
@@ -22,7 +23,8 @@ const client = new Paho.Client(broker, port, clientId);
 function checkConnection() {
     const currentTime = Date.now();
     if (currentTime - lastMessageTime > timeoutDuration) {
-        wifiElement.textContent = "desconectada";        
+        wifiElement.textContent = "DESCONECTADA";   
+        conexElement.textContent = "estado-conexion-activa";  
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
@@ -32,7 +34,11 @@ function checkConnection() {
 // Manejo de conexión perdida
 client.onConnectionLost = (response) => {
     console.error("Conexión perdida:", response.errorMessage);
-    wifiElement.textContent = "desconectada";
+    wifiElement.textContent = "DESCONECTADA";
+    conexElement.textContent = "estado-conexion-activa";
+    temperatureElement.textContent = "--";
+    humidityElement.textContent = "--";
+    nivelAguaElement.textContent = "--";
     clearInterval(timeoutTimer);
 };
 
@@ -40,7 +46,7 @@ client.onConnectionLost = (response) => {
 client.onMessageArrived = (message) => {
     try {
         const data = JSON.parse(message.payloadString);
-        wifiElement.textContent = data.wifi || "conectada"; // Si no viene wifi, mostrar "conectada"
+        wifiElement.textContent = data.wifi || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
