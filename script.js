@@ -1,6 +1,6 @@
 // Configuración MQTT (HiveMQ Cloud)
-const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud"; // Cambia por tu broker
-const port = 8884; // Puerto para WebSocket (SSL)
+const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud";
+const port = 8884;
 const topic = "casa/sensores";
 
 // Elementos del DOM
@@ -9,23 +9,45 @@ const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
 
+// Variables para control de tiempo
+let lastMessageTime = 0;
+const timeoutDuration = 10000; // 10 segundos sin mensajes = desconectado
+let timeoutTimer;
+
 // Cliente MQTT
 const clientId = "web_" + parseInt(Math.random() * 100, 10);
 const client = new Paho.Client(broker, port, clientId);
 
+// Función para manejar desconexión por tiempo
+function checkConnection() {
+    const currentTime = Date.now();
+    if (currentTime - lastMessageTime > timeoutDuration) {
+        wifiElement.textContent = "desconectada";
+        // Opcional: también podrías limpiar los otros valores
+        // temperatureElement.textContent = "--";
+        // humidityElement.textContent = "--";
+        // nivelAguaElement.textContent = "--";
+    }
+}
+
 // Manejo de conexión perdida
 client.onConnectionLost = (response) => {
     console.error("Conexión perdida:", response.errorMessage);
+    wifiElement.textContent = "desconectada";
+    clearInterval(timeoutTimer);
 };
 
 // Manejo de mensajes recibidos
 client.onMessageArrived = (message) => {
     try {
         const data = JSON.parse(message.payloadString);
-        wifiElement.textContent = data.wifi;
+        wifiElement.textContent = data.wifi || "conectada"; // Si no viene wifi, mostrar "conectada"
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
+        
+        // Actualizar el tiempo del último mensaje
+        lastMessageTime = Date.now();
         console.log("Datos actualizados:", data);
     } catch (error) {
         console.error("Error al procesar mensaje:", error);
@@ -35,14 +57,18 @@ client.onMessageArrived = (message) => {
 // Opciones de conexión
 const options = {
     useSSL: true,
-    userName: "github", // Cambia por tu usuario
-    password: "Ivan4826", // Cambia por tu contraseña
+    userName: "github",
+    password: "Ivan4826",
     onSuccess: () => {
         console.log("Conectado a HiveMQ Cloud");
         client.subscribe(topic);
+        // Iniciar temporizador para verificar conexión
+        lastMessageTime = Date.now();
+        timeoutTimer = setInterval(checkConnection, 1000); // Verificar cada segundo
     },
     onFailure: (error) => {
         console.error("Error de conexión:", error.errorMessage);
+        wifiElement.textContent = "desconectada";
     }
 };
 
