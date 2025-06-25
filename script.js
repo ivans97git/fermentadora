@@ -5,7 +5,7 @@ const topic = "casa/sensores";
 
 // Elementos del DOM
 const wifiElement = document.getElementById("wifi");
-const conexElement = document.getElementByClassName("conex");
+const conexElement = document.getElementsByClassName("conex");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
