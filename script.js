@@ -4,7 +4,7 @@ const port = 8884; // Puerto para WebSocket (SSL)
 const topic = "casa/sensores";
 
 // Elementos del DOM
-const ewifiElement = document.getElementById("ewifi");
+const wifiElement = document.getElementById("wifi");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
@@ -22,7 +22,7 @@ client.onConnectionLost = (response) => {
 client.onMessageArrived = (message) => {
     try {
         const data = JSON.parse(message.payloadString);
-        ewifiElement.textContent = data.ewifi;
+        wifiElement.textContent = data.wifi;
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
