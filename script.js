@@ -6,6 +6,7 @@
 const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud";
 const port = 8884;
 const topic = "casa/sensores";
+const topicConfiguracion = "casa/config";    // Tópico para enviar configuración al ESP32
 const timeoutDuration = 10000; // 10 segundos sin mensajes = desconectado
 
 // Valores por defecto
@@ -150,15 +151,25 @@ function cargarConfiguracion() {
     // Actualizar las variables primero
     actualizarVariablesConfiguracion();
     
-    // Luego usar las variables actualizadas
-    ultimoValorCargado = {
+    // Crear objeto con la configuración
+    const configuracion = {
         temperatura: configTemperatura,
         humedad: configHumedad,
         tiempo: configTiempo,
-        fecha: new Date().toISOString()
+        timestamp: new Date().toISOString()
     };
+
+    // Publicar la configuración via MQTT
+    const message = new Paho.Message(JSON.stringify(configuracion));
+    message.destinationName = topicConfiguracion;
+    client.send(message);
     
-    console.log('Configuración cargada:', ultimoValorCargado);
+    console.log('Configuración enviada:', configuracion);
+    alert(`Configuración enviada al ESP32:\nTemperatura: ${configTemperatura}°C\nHumedad: ${configHumedad}%\nTiempo: ${configTiempo} minutos`);
+    
+    // Guardar localmente (opcional)
+    ultimoValorCargado = configuracion;
+    localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
 }
 
 // ==============================================
