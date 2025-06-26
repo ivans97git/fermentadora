@@ -24,9 +24,9 @@
 
     // Elementos del DOM
     const wifiElement = document.getElementById("wifi");
-    const temperatureElement = document.getElementById("temperature");
-    const humidityElement = document.getElementById("humidity");
-    const nivelAguaElement = document.getElementById("nivelAgua");
+    //const temperatureElement = document.getElementById("temperature");
+    //const humidityElement = document.getElementById("humidity");
+    //const nivelAguaElement = document.getElementById("nivelAgua");
 
     // Configuración cliente MQTT
     const clientId = "web_" + parseInt(Math.random() * 100, 10);
@@ -88,18 +88,18 @@
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
-            temperatureElement.textContent = "--";
-            humidityElement.textContent = "--";
-            nivelAguaElement.textContent = "--";
+            //temperatureElement.textContent = "--";
+            //humidityElement.textContent = "--";
+            //nivelAguaElement.textContent = "--";
         }
     }
 
     function updateUI(data) {
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
-        temperatureElement.textContent = data.temperatura;
-        humidityElement.textContent = data.humedad;
-        nivelAguaElement.textContent = data.nivelAgua;
+        //temperatureElement.textContent = data.temperatura;
+        //humidityElement.textContent = data.humedad;
+        //nivelAguaElement.textContent = data.nivelAgua;
     }
 
     // ========== FUNCIONES DE CONFIGURACIÓN ==========
@@ -189,7 +189,7 @@
         client.send(message);
         
         console.log('Configuración enviada:', configuracion);
-        alert(`Configuración enviada al ESP32:\nTemperatura: ${configTemperatura}°C\nHumedad: ${configHumedad}%\nTiempo: ${formatMinutes(configTiempo)}`);
+        alert(`Configuración enviada al ESP32:\ncTemperatura: ${configTemperatura}°C\ncHumedad: ${configHumedad}%\ncTiempo: ${formatMinutes(configTiempo)}`);
         
         // Guardar localmente y mostrar
         ultimoValorCargado = configuracion;
