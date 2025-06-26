@@ -1,7 +1,3 @@
-// ==============================================
-// CONFIGURACIÓN Y CONSTANTES
-// ==============================================
-
 // Configuración MQTT (HiveMQ Cloud)
 const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud";
 const port = 8884;
@@ -16,9 +12,6 @@ const valoresPorDefecto = {
     tiempo: 1440 // 24 horas en minutos
 };
 
-// ==============================================
-// VARIABLES GLOBALES
-// ==============================================
 
 // Variables de configuración
 let configTemperatura = valoresPorDefecto.temperatura;
@@ -30,18 +23,13 @@ let lastMessageTime = 0;
 let timeoutTimer;
 let ultimoValorCargado = null;
 
-// ==============================================
-// ELEMENTOS DEL DOM
-// ==============================================
+
 
 const wifiElement = document.getElementById("wifi");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
 
-// ==============================================
-// CLIENTE MQTT
-// ==============================================
 
 const clientId = "web_" + parseInt(Math.random() * 100, 10);
 const client = new Paho.Client(broker, port, clientId);
@@ -55,9 +43,6 @@ const options = {
     onFailure: onConnectFailure
 };
 
-// ==============================================
-// FUNCIONES DE CONEXIÓN MQTT
-// ==============================================
 
 function onConnectSuccess() {
     console.log("Conectado a HiveMQ Cloud");
@@ -95,9 +80,7 @@ function onMessageArrived(message) {
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
-// ==============================================
-// FUNCIONES DE CONTROL DE CONEXIÓN
-// ==============================================
+
 
 function checkConnection() {
     const currentTime = Date.now();
@@ -119,9 +102,6 @@ function updateConnectionStatus(connected) {
     }
 }
 
-// ==============================================
-// FUNCIONES DE ACTUALIZACIÓN DE UI
-// ==============================================
 
 function updateUI(data) {
     wifiElement.textContent = data.wifi || "CONECTADA";
@@ -131,9 +111,7 @@ function updateUI(data) {
     nivelAguaElement.textContent = data.nivelAgua;
 }
 
-// ==============================================
-// FUNCIONES DE CONFIGURACIÓN
-// ==============================================
+
 
 function actualizarVariablesConfiguracion() {
     configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
@@ -172,18 +150,13 @@ function cargarConfiguracion() {
     localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
 }
 
-// ==============================================
-// EVENT LISTENERS
-// ==============================================
+
 
 document.getElementById('cargar').addEventListener('click', cargarConfiguracion);
 document.getElementById('temperatura').addEventListener('change', actualizarVariablesConfiguracion);
 document.getElementById('humedad').addEventListener('change', actualizarVariablesConfiguracion);
 document.getElementById('tiempo').addEventListener('change', actualizarVariablesConfiguracion);
 
-// ==============================================
-// INICIALIZACIÓN
-// ==============================================
 
 // Iniciar conexión MQTT
 client.connect(options);
