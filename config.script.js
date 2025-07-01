@@ -7,9 +7,9 @@
 
     // Valores por defecto
     const valoresPorDefecto = {
-        temperatura: 22.5,
-        humedad: 65,
-        tiempo: 1440 // 24 horas en minutos
+        temperatura: 30,
+        humedad: 70,
+        tiempo: 60 // 24 horas en minutos
     };
 
     // Variables de configuración
