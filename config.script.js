@@ -92,11 +92,8 @@
             console.log("Datos actualizados:", data);
         } catch (error) {
             console.error("Error al procesar mensaje:", error);
+        }
     }
-};
-
-
-
 
     function checkConnection() {
         const currentTime = Date.now();
