@@ -24,6 +24,11 @@
 
     // Elementos del DOM
     const wifiElement = document.getElementById("wifi");
+    const estadoElement = document.getElementById("estado");
+    const tempElement = document.getElementById("temp");
+    const humElement = document.getElementById("hum");
+    const tiempoElement = document.getElementById("tiempo");
+
     //const temperatureElement = document.getElementById("temperature");
     //const humidityElement = document.getElementById("humidity");
     //const nivelAguaElement = document.getElementById("nivelAgua");
@@ -73,6 +78,25 @@
             console.error("Error al procesar mensaje:", error);
         }
     }
+
+    client.onMessageArrived = (message) => {
+        try {
+            const data = JSON.parse(message.payloadString);
+            estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
+            tempElement.textContent = data.temp;
+            humElement.textContent = data.hum;
+            tiempoElement.textContent = data.tiempo;
+        
+            // Actualizar el tiempo del último mensaje
+            lastMessageTime = Date.now();
+            console.log("Datos actualizados:", data);
+        } catch (error) {
+            console.error("Error al procesar mensaje:", error);
+    }
+};
+
+
+
 
     function checkConnection() {
         const currentTime = Date.now();
