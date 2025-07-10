@@ -3,8 +3,8 @@ const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud";
 const port = 8884;
 const topic = "casa/sensores";
 const topice = "casa/estado";
-const estado = 0 ; 
-const conexion= 0 ; 
+let estado = 0 ; 
+let conexion= 0 ; 
 
 // Elementos del DOM
 const wifiElement = document.getElementById("wifi");
