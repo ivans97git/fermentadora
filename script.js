@@ -110,12 +110,12 @@ function iniciar() {
         if (conexion === 1) {
             if (estado === 0 ){
                 // Publicar la configuración via MQTT
-                const message = new Paho.Message(JSON.stringify({"wifi":1.0}));
+                const message = new Paho.Message(JSON.stringify({"eweb":1.0}));
                 message.destinationName = topice;
                 client.send(message);
         
-                console.log('Estado enviado:', eweb);
-                alert(`Estado enviado al ESP32:\nceweb: ${eweb}`);
+                console.log('Iniciando Fermentadora');
+                alert(`Iniciando Fermentadora`);
             } else {
             alert(`La fermentadora esta OPERATIVA. \n Si desea cambiar los parametros de funcionamiento, \n vaya al menu Configuración, verifique \n los valores y presione CARGAR.`);
             }
@@ -128,12 +128,12 @@ function parar() {
         if (conexion === 1) {
             if (estado === 1 ){
                 // Publicar la configuración via MQTT
-                const message = new Paho.Message(JSON.stringify({"wifi":0.0}));
+                const message = new Paho.Message(JSON.stringify({"eweb":0.0}));
                 message.destinationName = topice;
                 client.send(message);
         
-                console.log('Estado enviado:', eweb);
-                alert(`Estado enviado al ESP32:\nceweb: ${eweb}`);
+                console.log('Parando Fermentadora');
+                alert(`Parando Fermentadora`);
             } else {
             alert(`La fermentadora esta EN ESPERA.`);
             }
