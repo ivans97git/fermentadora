@@ -4,7 +4,7 @@
     const topic = "casa/sensores";
     const topicConfiguracion = "casa/config";    // Tópico para enviar configuración al ESP32
     const timeoutDuration = 10000; // 10 segundos sin mensajes = desconectado
-
+    const conexion= 0 ; 
     // Valores por defecto
     const valoresPorDefecto = {
         temperatura: 30,
@@ -106,9 +106,11 @@
         if (connected) {
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
+            const conexion= 1 ; 
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
+            const conexion= 0 ; 
             //temperatureElement.textContent = "--";
             //humidityElement.textContent = "--";
             //nivelAguaElement.textContent = "--";
@@ -118,6 +120,7 @@
     function updateUI(data) {
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
+        const conexion= 1 ; 
         //temperatureElement.textContent = data.temperatura;
         //humidityElement.textContent = data.humedad;
         //nivelAguaElement.textContent = data.nivelAgua;
@@ -192,28 +195,33 @@
     }
 
     function cargarConfiguracion() {
-        // Actualizar las variables primero
-        actualizarVariablesConfiguracion();
+        if (conexion= 1) {
+            // Actualizar las variables primero
+            actualizarVariablesConfiguracion();
         
-        // Crear objeto con la configuración
-        const configuracion = {
+            // Crear objeto con la configuración
+            const configuracion = {
             temperatura: configTemperatura,
             humedad: configHumedad,
             tiempo: configTiempo,          
-        };
+            };
 
-        // Publicar la configuración via MQTT
-        const message = new Paho.Message(JSON.stringify(configuracion));
-        message.destinationName = topicConfiguracion;
-        client.send(message);
+            // Publicar la configuración via MQTT
+            const message = new Paho.Message(JSON.stringify(configuracion));
+            message.destinationName = topicConfiguracion;
+            client.send(message);
         
-        console.log('Configuración enviada:', configuracion);
-        alert(`Configuración enviada al ESP32:\nTemperatura: ${configTemperatura}°C\nHumedad: ${configHumedad}%\nTiempo: ${formatMinutes(configTiempo)}`);
+            console.log('Configuración enviada:', configuracion);
+            alert(`Configuración enviada al ESP32:\nTemperatura: ${configTemperatura}°C\nHumedad: ${configHumedad}%\nTiempo: ${formatMinutes(configTiempo)}`);
         
-        // Guardar localmente y mostrar
-        ultimoValorCargado = configuracion;
-        localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
-        mostrarUltimoValor();
+            // Guardar localmente y mostrar
+            ultimoValorCargado = configuracion;
+            localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
+            mostrarUltimoValor();
+        }
+        else {
+            alert(`La fermentadora no esta conectada.\n Verifique la conexión.`);
+        }
     }
 
     // ========== INICIALIZACIÓN ==========
