@@ -107,7 +107,7 @@
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
             conexion= 1 ; 
-            tempElement.textContent = ;
+            tempElement.textContent = "--";
             humElement.textContent = "--";
             tiempoElement.textContent = "--";
         } else {
