@@ -208,7 +208,7 @@
         client.send(message);
         
         console.log('Configuración enviada:', configuracion);
-        //alert(`Configuración enviada al ESP32:\ncTemperatura: ${configTemperatura}°C\ncHumedad: ${configHumedad}%\ncTiempo: ${formatMinutes(configTiempo)}`);
+        alert(`Configuración enviada al ESP32:\nTemperatura: ${configTemperatura}°C\nHumedad: ${configHumedad}%\nTiempo: ${formatMinutes(configTiempo)}`);
         
         // Guardar localmente y mostrar
         ultimoValorCargado = configuracion;
