@@ -2,7 +2,9 @@
 const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud";
 const port = 8884;
 const topic = "casa/sensores";
-const topice = "casa/estado"
+const topice = "casa/estado";
+const estado = 0 ; 
+const conexion= 0 ; 
 
 // Elementos del DOM
 const wifiElement = document.getElementById("wifi");
@@ -32,6 +34,7 @@ function checkConnection() {
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
+        conexion = 0;
     }
 }
 
@@ -45,6 +48,7 @@ client.onConnectionLost = (response) => {
     temperatureElement.textContent = "--";
     humidityElement.textContent = "--";
     nivelAguaElement.textContent = "--";
+    conexion= 0;
     clearInterval(timeoutTimer);
 };
 
@@ -57,14 +61,17 @@ client.onMessageArrived = (message) => {
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
+        conexion= 1;
         if (data.estado === "1") {
         estadoElement.textContent = "OPERATIVA";
         estadoElement.style.color = "#45A049";
         estadocElement.style.backgroundColor = "#E8F5E9";
+        estado=1;
         } else {
         estadoElement.textContent = "EN ESPERA";
         estadoElement.style.color = "#D32F2F";
         estadocElement.style.backgroundColor = "#FFB2B2";
+        estado=0;
         }
         
         // Actualizar el tiempo del último mensaje
@@ -96,8 +103,44 @@ const options = {
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
+        conexion= 0;
     }
 };
+function iniciar() {        
+        if (conexion === 1) {
+            if (estado === 0 ){
+                const eweb = 1 ;
+
+                // Publicar la configuración via MQTT
+                const message = new Paho.Message(JSON.stringify(eweb));
+                message.destinationName = topice;
+                client.send(message);
+        
+                console.log('Estado enviado:', eweb);
+                alert(`Estado enviado al ESP32:\nceweb: ${eweb}`);
+            }
+        }
+}    
+
+function parar() {        
+        if (conexion === 1) {
+            if (estado === 1 ){
+                const eweb = 0 ;
+
+                // Publicar la configuración via MQTT
+                const message = new Paho.Message(JSON.stringify(eweb));
+                message.destinationName = topice;
+                client.send(message);
+        
+                console.log('Estado enviado:', eweb);
+                alert(`Estado enviado al ESP32:\nceweb: ${eweb}`);
+            }
+        }
+}    
+
 
 // Iniciar conexión MQTT
 client.connect(options);
+
+document.getElementById('iniciar').addEventListener('click', iniciar);
+document.getElementById('parar').addEventListener('click', parar);
