@@ -85,7 +85,7 @@
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
             tempElement.textContent = data.temp;
             humElement.textContent = data.hum;
-            tiempoElement.textContent = data.tiempo;
+            tiempoElement.textContent = data.tres;
         
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
@@ -169,15 +169,15 @@
         container.innerHTML = `
             <div class="ultimo-valor-item">
                 <div class="ultimo-valor-label">Temperatura</div>
-                <div class="ultimo-valor-dato">${ultimoValorCargado.temperatura}°C</div>
+                <div class="ultimo-valor-dato" id="temp">°C</div>
             </div>
             <div class="ultimo-valor-item">
                 <div class="ultimo-valor-label">Humedad</div>
-                <div class="ultimo-valor-dato">${ultimoValorCargado.humedad}%</div>
+                <div class="ultimo-valor-dato" id="hum">%</div>
             </div>
             <div class="ultimo-valor-item">
                 <div class="ultimo-valor-label">Tiempo</div>
-                <div class="ultimo-valor-dato">${formatMinutes(ultimoValorCargado.tiempo)}</div>
+                <div class="ultimo-valor-dato" id="tiempo">min</div>
             </div>
                     `;
     }
@@ -216,7 +216,7 @@
         
             // Guardar localmente y mostrar
             ultimoValorCargado = configuracion;
-            localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
+            //localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
             mostrarUltimoValor();
         }
         else {
