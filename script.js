@@ -122,7 +122,7 @@ function iniciar() {
             alert(`La fermentadora esta OPERATIVA. \n Si desea cambiar los parametros de funcionamiento, \n vaya al menu Configuración, verifique \n los valores y presione CARGAR.`);
             }
         } else {
-            alert(`La fermentadora no esta conectada.`);
+            alert(`La fermentadora no esta conectada.\n Verifique la conexión.`);
             }
 }    
 
@@ -142,7 +142,7 @@ function parar() {
             alert(`La fermentadora esta EN ESPERA.`);
             }
             } else {
-            alert(`La fermentadora no esta conectada.`);
+            alert(`La fermentadora no esta conectada.\n Verifique la conexión.`);
             }
 }  
 
