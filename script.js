@@ -109,10 +109,10 @@ const options = {
 function iniciar() {        
         if (conexion === 1) {
             if (estado === 0 ){
-                const eweb = 1 ;
+                const eweb = '{"wifi":1.0}´
 
                 // Publicar la configuración via MQTT
-                const message = new Paho.Message(JSON.stringify(eweb));
+                const message = new Paho.Message(JSON.stringify(eweb);
                 message.destinationName = topice;
                 client.send(message);
         
