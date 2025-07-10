@@ -4,7 +4,7 @@
     const topic = "casa/sensores";
     const topicConfiguracion = "casa/config";    // Tópico para enviar configuración al ESP32
     const timeoutDuration = 10000; // 10 segundos sin mensajes = desconectado
-    const conexion= 0 ; 
+    let conexion= 0 ; 
     // Valores por defecto
     const valoresPorDefecto = {
         temperatura: 30,
