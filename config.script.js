@@ -199,8 +199,7 @@
         const configuracion = {
             temperatura: configTemperatura,
             humedad: configHumedad,
-            tiempo: configTiempo,
-            timestamp: new Date().toISOString()
+            tiempo: configTiempo,          
         };
 
         // Publicar la configuración via MQTT
