@@ -2,9 +2,12 @@
 const broker = "90883d7a8ff64950af6e002e4bd77ee3.s1.eu.hivemq.cloud";
 const port = 8884;
 const topic = "casa/sensores";
+const topice = "casa/estado"
 
 // Elementos del DOM
 const wifiElement = document.getElementById("wifi");
+const estadoElement = document.getElementById("estado");
+const estadocElement = document.getElementById("estadoc");
 const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
@@ -24,6 +27,8 @@ function checkConnection() {
     if (currentTime - lastMessageTime > timeoutDuration) {
         wifiElement.textContent = "DESCONECTADA";
         wifiElement.style.color = "#F44336";
+        estadoElement.textContent = "--";
+        estadocElement.style.backgroundColor = "#E0E0E0";
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
@@ -35,6 +40,8 @@ client.onConnectionLost = (response) => {
     console.error("Conexión perdida:", response.errorMessage);
     wifiElement.textContent = "DESCONECTADA";
     wifiElement.style.color = "#F44336";
+    estadoElement.textContent = "--";
+    estadocElement.style.backgroundColor = "#E0E0E0";
     temperatureElement.textContent = "--";
     humidityElement.textContent = "--";
     nivelAguaElement.textContent = "--";
@@ -50,6 +57,15 @@ client.onMessageArrived = (message) => {
         temperatureElement.textContent = data.temperatura;
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
+        if (data.estado === "1") {
+        estadoElement.textContent = "OPERATIVA";
+        estadoElement.style.color = "#45A049";
+        estadocElement.style.backgroundColor = "#E8F5E9";
+        } else {
+        estadoElement.textContent = "EN ESPERA";
+        estadoElement.style.color = "#D32F2F";
+        estadocElement.style.backgroundColor = "#FC5E5E";
+        }
         
         // Actualizar el tiempo del último mensaje
         lastMessageTime = Date.now();
@@ -75,6 +91,8 @@ const options = {
         console.error("Error de conexión:", error.errorMessage);
         wifiElement.textContent = "DESCONECTADA";
         wifiElement.style.color = "#F44336";
+        estadoElement.textContent = "--";
+        estadocElement.style.backgroundColor = "#E0E0E0";
         temperatureElement.textContent = "--";
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
