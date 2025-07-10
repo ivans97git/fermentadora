@@ -109,10 +109,8 @@ const options = {
 function iniciar() {        
         if (conexion === 1) {
             if (estado === 0 ){
-                const eweb = '{"wifi":1.0}´;
-
                 // Publicar la configuración via MQTT
-                const message = new Paho.Message(JSON.stringify(eweb);
+                const message = new Paho.Message(JSON.stringify({"wifi":1.0}));
                 message.destinationName = topice;
                 client.send(message);
         
@@ -129,10 +127,8 @@ function iniciar() {
 function parar() {        
         if (conexion === 1) {
             if (estado === 1 ){
-                const eweb = 0 ;
-
                 // Publicar la configuración via MQTT
-                const message = new Paho.Message(JSON.stringify(eweb));
+                const message = new Paho.Message(JSON.stringify({"wifi":0.0}));
                 message.destinationName = topice;
                 client.send(message);
         
