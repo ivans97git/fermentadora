@@ -234,7 +234,7 @@
 
     // Inicializar displays
     updateTimeDisplay();
-    mostrarUltimoValor();
+    //mostrarUltimoValor();
 
     // Event listeners
     document.getElementById('tiempo').addEventListener('input', updateTimeDisplay);
