@@ -118,8 +118,12 @@ function iniciar() {
         
                 console.log('Estado enviado:', eweb);
                 alert(`Estado enviado al ESP32:\nceweb: ${eweb}`);
+            } else {
+            alert(`La fermentadora esta OPERATIVA. \n Si desea cambiar los parametros de funcionamiento, \n vaya al menu Configuración, verifique \n los valores y presione CARGAR.`);
             }
-        }
+        } else {
+            alert(`La fermentadora no esta conectada.`);
+            }
 }    
 
 function parar() {        
@@ -134,9 +138,13 @@ function parar() {
         
                 console.log('Estado enviado:', eweb);
                 alert(`Estado enviado al ESP32:\nceweb: ${eweb}`);
+            } else {
+            alert(`La fermentadora esta EN ESPERA.`);
             }
-        }
-}    
+            } else {
+            alert(`La fermentadora no esta conectada.`);
+            }
+}  
 
 
 // Iniciar conexión MQTT
