@@ -176,10 +176,9 @@
                 <div class="ultimo-valor-label">Tiempo</div>
                 <div class="ultimo-valor-dato">${formatMinutes(ultimoValorCargado.tiempo)}</div>
             </div>
-            // <div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
-        `;
+                    `;
     }
-
+// <div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
     function actualizarVariablesConfiguracion() {
         configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
         configHumedad = parseInt(document.getElementById('humedad').value) || valoresPorDefecto.humedad;
