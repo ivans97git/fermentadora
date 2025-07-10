@@ -64,7 +64,7 @@ client.onMessageArrived = (message) => {
         } else {
         estadoElement.textContent = "EN ESPERA";
         estadoElement.style.color = "#D32F2F";
-        estadocElement.style.backgroundColor = "#FC5E5E";
+        estadocElement.style.backgroundColor = "#FFB2B2";
         }
         
         // Actualizar el tiempo del último mensaje
