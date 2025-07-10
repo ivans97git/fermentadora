@@ -176,7 +176,7 @@
                 <div class="ultimo-valor-label">Tiempo</div>
                 <div class="ultimo-valor-dato">${formatMinutes(ultimoValorCargado.tiempo)}</div>
             </div>
-            <div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
+            // <div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
         `;
     }
 
