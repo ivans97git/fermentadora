@@ -147,14 +147,14 @@ footer {
     font-weight: bold;
 }
 
-.estado-activo {
+/* .estado-activo {
     color: #2e7d32;
 }
 
 .estado-inactivo {
     color: #c62828;
 }
-
+*/
 .footer-content {
     display: flex;
     flex-wrap: wrap;
