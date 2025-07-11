@@ -16,6 +16,10 @@
     let configTemperatura = valoresPorDefecto.temperatura;
     let configHumedad = valoresPorDefecto.humedad;
     let configTiempo = valoresPorDefecto.tiempo;
+    
+    let tempFij = valoresPorDefecto.temperatura;
+    let humFij = valoresPorDefecto.humedad;
+    let tiemFij = valoresPorDefecto.tiempo;
 
     // Variables para control de conexión
     let lastMessageTime = 0;
@@ -32,7 +36,9 @@
     //const temperatureElement = document.getElementById("temperature");
     //const humidityElement = document.getElementById("humidity");
     //const nivelAguaElement = document.getElementById("nivelAgua");
-
+    tempElement.textContent = tempFij;
+    humElement.textContent = humFij;
+    tiempoElement.textContent = tiemFij;
     // Configuración cliente MQTT
     const clientId = "web_" + parseInt(Math.random() * 100, 10);
     const client = new Paho.Client(broker, port, clientId);
@@ -83,10 +89,9 @@
         try {
             const data = JSON.parse(message.payloadString);
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            tempElement.textContent = data.temp;
-            humElement.textContent = data.hum;
-            tiempoElement.textContent = data.tres;
-        
+            tempFij = data.temp;
+            humFij = data.hum;
+            tiemFij = data.tres;
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
             console.log("Datos actualizados:", data);
