@@ -116,7 +116,7 @@
             conexion= 1 ; 
             tempElement.textContent = tempFij;
             humElement.textContent = humFij;
-            tiemElement.textContent = tiemFij"--";
+            tiemElement.textContent = tiemFij;
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
