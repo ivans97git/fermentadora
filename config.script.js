@@ -17,9 +17,9 @@
     let configHumedad = valoresPorDefecto.humedad;
     let configTiempo = valoresPorDefecto.tiempo;
     
-    let tempFij = valoresPorDefecto.temperatura;
-    let humFij = valoresPorDefecto.humedad;
-    let tiemFij = valoresPorDefecto.tiempo;
+    //let tempFij = valoresPorDefecto.temperatura;
+    //let humFij = valoresPorDefecto.humedad;
+    //let tiemFij = valoresPorDefecto.tiempo;
 
     // Variables para control de conexión
     let lastMessageTime = 0;
@@ -91,9 +91,9 @@
         try {
             const data = JSON.parse(message.payloadString);
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            tempFij = data.temp;
-            humFij = data.hum;
-            tiemFij = data.tres;
+            let tempFij = data.temp;
+            let humFij = data.hum;
+            let tiemFij = data.tres;
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
             console.log("Datos actualizados:", data);
