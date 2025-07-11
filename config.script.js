@@ -31,7 +31,7 @@
     //const estadoElement = document.getElementById("estado");
     const tempElement = document.getElementById("temp");
     const humElement = document.getElementById("hum");
-    const tiempoElement = document.getElementById("tiempo");
+    const tiempoElement = document.getElementById("tiem");
 
     //const temperatureElement = document.getElementById("temperature");
     //const humidityElement = document.getElementById("humidity");
