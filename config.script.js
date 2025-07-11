@@ -31,14 +31,16 @@
     //const estadoElement = document.getElementById("estado");
     const tempElement = document.getElementById("temp");
     const humElement = document.getElementById("hum");
-    const tiempoElement = document.getElementById("tiem");
+    const tiempoElement = document.getElementById("tiempo");
+    const tiemElement = document.getElementById("tiem");
 
     //const temperatureElement = document.getElementById("temperature");
     //const humidityElement = document.getElementById("humidity");
     //const nivelAguaElement = document.getElementById("nivelAgua");
     tempElement.textContent = tempFij;
     humElement.textContent = humFij;
-    tiempoElement.textContent = tiemFij;
+    tiemElement.textContent = tiemFij;
+
     // Configuración cliente MQTT
     const clientId = "web_" + parseInt(Math.random() * 100, 10);
     const client = new Paho.Client(broker, port, clientId);
@@ -112,16 +114,16 @@
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
             conexion= 1 ; 
-            tempElement.textContent = "--";
-            humElement.textContent = "--";
-            tiempoElement.textContent = "--";
+            tempElement.textContent = tempFij;
+            humElement.textContent = humFij;
+            tiemElement.textContent = tiemFij"--";
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
             conexion= 0 ; 
             tempElement.textContent = "--";
             humElement.textContent = "--";
-            tiempoElement.textContent = "--";
+            tiemElement.textContent = "--";
         }
     }
 
@@ -129,6 +131,9 @@
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
         conexion= 1 ; 
+        tempElement.textContent = tempFij;
+        humElement.textContent = humFij;
+        tiemElement.textContent = tiemFij;
         //temperatureElement.textContent = data.temperatura;
         //humidityElement.textContent = data.humedad;
         //nivelAguaElement.textContent = data.nivelAgua;
