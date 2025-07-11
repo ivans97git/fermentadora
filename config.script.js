@@ -37,10 +37,7 @@
     //const temperatureElement = document.getElementById("temperature");
     //const humidityElement = document.getElementById("humidity");
     //const nivelAguaElement = document.getElementById("nivelAgua");
-    tempElement.textContent = tempFij;
-    humElement.textContent = humFij;
-    tiemElement.textContent = tiemFij;
-
+    
     // Configuración cliente MQTT
     const clientId = "web_" + parseInt(Math.random() * 100, 10);
     const client = new Paho.Client(broker, port, clientId);
@@ -94,6 +91,9 @@
             let tempFij = data.temp;
             let humFij = data.hum;
             let tiemFij = data.tres;
+            tempElement.textContent = tempFij;
+            humElement.textContent = humFij;
+            tiemElement.textContent = tiemFij;
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
             console.log("Datos actualizados:", data);
