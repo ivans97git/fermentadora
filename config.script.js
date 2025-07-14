@@ -29,10 +29,11 @@
     // Elementos del DOM
     const wifiElement = document.getElementById("wifi");
     //const estadoElement = document.getElementById("estado");
-    const tempElement = document.getElementById("temp");
-    const humElement = document.getElementById("hum");
     const tiempoElement = document.getElementById("tiempo");
-    const tiemElement = document.getElementById("tiem");
+    
+    //const tempElement = document.getElementById("temp");
+    //const humElement = document.getElementById("hum");
+    //const tiemElement = document.getElementById("tiem");
 
     //const temperatureElement = document.getElementById("temperature");
     //const humidityElement = document.getElementById("humidity");
@@ -88,12 +89,15 @@
         try {
             const data = JSON.parse(message.payloadString);
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            let tempFij = data.temp;
-            let humFij = data.hum;
-            let tiemFij = data.tres;
-            tempElement.textContent = tempFij;
-            humElement.textContent = humFij;
-            tiemElement.textContent = tiemFij;
+            //let tempFij = data.temp;
+            //let humFij = data.hum;
+            //let tiemFij = data.tres;
+            document.getElementById("temp")=data.temp;
+            document.getElementById("hum")=data.hum;
+            document.getElementById("tiem")=data.tres;
+            //tempElement.textContent = tempFij;
+            //humElement.textContent = humFij;
+            //tiemElement.textContent = tiemFij;
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
             console.log("Datos actualizados:", data);
