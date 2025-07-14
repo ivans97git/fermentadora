@@ -17,9 +17,9 @@
     let configHumedad = valoresPorDefecto.humedad;
     let configTiempo = valoresPorDefecto.tiempo;
     
-    //let tempFij = valoresPorDefecto.temperatura;
-    //let humFij = valoresPorDefecto.humedad;
-    //let tiemFij = valoresPorDefecto.tiempo;
+    let tempFij ;
+    let humFij ;
+    let tiemFij ;
 
     // Variables para control de conexión
     let lastMessageTime = 0;
