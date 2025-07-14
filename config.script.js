@@ -21,6 +21,10 @@
     let humFij ;
     let tiemFij ;
 
+    document.getElementById("temp")=tempFij;
+    document.getElementById("hum")=humFij;
+    document.getElementById("tiem")=tiemFij;
+
     // Variables para control de conexión
     let lastMessageTime = 0;
     let timeoutTimer;
@@ -92,9 +96,9 @@
             //let tempFij = data.temp;
             //let humFij = data.hum;
             //let tiemFij = data.tres;
-            document.getElementById("temp")=data.temp;
-            document.getElementById("hum")=data.hum;
-            document.getElementById("tiem")=data.tres;
+            tempFij=data.temp ;
+            humFij=data.hum ;
+            tiemFij=data.tres ;
             //tempElement.textContent = tempFij;
             //humElement.textContent = humFij;
             //tiemElement.textContent = tiemFij;
@@ -118,16 +122,16 @@
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
             conexion= 1 ; 
-            tempElement.textContent = tempFij;
-            humElement.textContent = humFij;
-            tiemElement.textContent = tiemFij;
+            document.getElementById("temp")=tempFij;
+            document.getElementById("hum")=humFij;
+            document.getElementById("tiem")=tiemFij;
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
             conexion= 0 ; 
-            tempElement.textContent = "--";
-            humElement.textContent = "--";
-            tiemElement.textContent = "--";
+            document.getElementById("temp")="--";
+            document.getElementById("hum")="--";
+            document.getElementById("tiem")="--";
         }
     }
 
@@ -135,9 +139,9 @@
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
         conexion= 1 ; 
-        tempElement.textContent = tempFij;
-        humElement.textContent = humFij;
-        tiemElement.textContent = tiemFij;
+       document.getElementById("temp")=tempFij;
+        document.getElementById("hum")=humFij;
+        document.getElementById("tiem")=tiemFij;
         //temperatureElement.textContent = data.temperatura;
         //humidityElement.textContent = data.humedad;
         //nivelAguaElement.textContent = data.nivelAgua;
