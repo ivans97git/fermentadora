@@ -74,7 +74,7 @@
         tempFij.textContent = data.temp;
         humFij.textContent = data.hum;
         tiemFij.textContent = data.tiempo;
-        
+        conexión = 1;
         // Actualizar el tiempo del último mensaje
         lastMessageTime = Date.now();
         console.log("Datos actualizados:", data);
