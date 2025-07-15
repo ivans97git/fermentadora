@@ -88,7 +88,7 @@
         wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
         tempFij.textContent = data.temp;
         humFij.textContent = data.hum;
-        tiemFij.textContent = data.tres;
+        tiemFij.textContent = data.tiempo;
         
         // Actualizar el tiempo del último mensaje
         lastMessageTime = Date.now();
