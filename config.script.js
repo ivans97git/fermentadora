@@ -20,7 +20,7 @@
     // Variables para control de conexión
     let lastMessageTime = 0;
     let timeoutTimer;
-    //let ultimoValorCargado = JSON.parse(localStorage.getItem('ultimoValorFermentadora')) || null;
+    
 
     // Elementos del DOM
     const wifiElement = document.getElementById("wifi");
@@ -64,23 +64,7 @@
         clearInterval(timeoutTimer);
     }
 
-/*
-    function onMessageArrived(message) {
-        try {
-            const data = JSON.parse(message.payloadString);
-            updateUI(data);
-            wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            tempFij.textContent = data.temp;
-            humFij.textContent = data.hum;
-            tiemFij.textContent = data.tres;
-            // Actualizar el tiempo del último mensaje
-            lastMessageTime = Date.now();
-            console.log("Datos actualizados:", data);
-        } catch (error) {
-            console.error("Error al procesar mensaje:", error);
-         }
-       }
-*/        
+       
 
     function onMessageArrived (message) {
     try {
@@ -156,34 +140,7 @@
         const minutes = parseInt(document.getElementById('tiempo').value) || 0;
         document.getElementById('time-display').textContent = `Equivalente: ${formatMinutes(minutes)}`;
     }
-/*
-    function mostrarUltimoValor() {
-        const container = document.getElementById('ultimo-valor-content');
-        
-      if (!ultimoValorCargado) {
-            container.innerHTML = '<div class="no-valor">No se han cargado valores aún</div>';
-            return;
-        }
-        
-        const fecha = new Date(ultimoValorCargado.timestamp || ultimoValorCargado.fecha);
-        
-        container.innerHTML = `
-          <div class="ultimo-valor-item">
-             <div class="ultimo-valor-label">Temperatura</div>
-                <div class="ultimo-valor-dato" id="temp">°C</div>
-            </div>
-            <div class="ultimo-valor-item">
-                <div class="ultimo-valor-label">Humedad</div>
-                <div class="ultimo-valor-dato" id="hum">%</div>
-            </div>
-            <div class="ultimo-valor-item">
-                <div class="ultimo-valor-label">Tiempo</div>
-                <div class="ultimo-valor-dato" id="tiempo">min</div>
-            </div>
-                    `;
-    }
-<div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
-*/
+
     function actualizarVariablesConfiguracion() {
         configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
         configHumedad = parseInt(document.getElementById('humedad').value) || valoresPorDefecto.humedad;
@@ -222,8 +179,7 @@
         
             // Guardar localmente y mostrar
             ultimoValorCargado = configuracion;
-            //localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
-            //mostrarUltimoValor();
+            
             }
         }
 
