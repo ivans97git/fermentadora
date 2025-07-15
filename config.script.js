@@ -75,7 +75,7 @@
         updateConnectionStatus(false);
         clearInterval(timeoutTimer);
     }
-
+/*
     function onMessageArrived(message) {
         try {
             const data = JSON.parse(message.payloadString);
@@ -90,31 +90,24 @@
             console.log("Datos actualizados:", data);
         } catch (error) {
             console.error("Error al procesar mensaje:", error);
-        }
-    }
+   //     }
+   // }
+   */     
 
     client.onMessageArrived = (message) => {
-        try {
-            const data = JSON.parse(message.payloadString);
-            estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            
-            tempFij.textContent = data.estado;
-            humFij.textContent = data.estado;
-            tiemFij.textContent = data.estado;
-            
-            //tempFij = data.temp ;
-            //humFij = data.hum ;
-            //tiemFij = data.tres ;
-            //tempElement.textContent = tempFij;
-            //humElement.textContent = humFij;
-            //tiemElement.textContent = tiemFij;
-            // Actualizar el tiempo del último mensaje
-            lastMessageTime = Date.now();
-            console.log("Datos actualizados:", data);
-        } catch (error) {
-            console.error("Error al procesar mensaje:", error);
-        }
+    try {
+        const data = JSON.parse(message.payloadString);
+        tempFij.textContent = data.estado;
+        humFij.textContent = data.estado;
+        tiemFij.textContent = data.estado;
+        
+        // Actualizar el tiempo del último mensaje
+        lastMessageTime = Date.now();
+        console.log("Datos actualizados:", data);
+    } catch (error) {
+        console.error("Error al procesar mensaje:", error);
     }
+};
 
     function checkConnection() {
         const currentTime = Date.now();
