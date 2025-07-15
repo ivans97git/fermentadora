@@ -16,15 +16,7 @@
     let configTemperatura = valoresPorDefecto.temperatura;
     let configHumedad = valoresPorDefecto.humedad;
     let configTiempo = valoresPorDefecto.tiempo;
-    
-    //let tempFij= 2;
-    //let humFij= 2;
-    //let tiemFij= 2 ;
-
-    const tempFij = document.getElementById("temp");
-    const humFij = document.getElementById("hum");
-    const tiemFij = document.getElementById("tiem");
-
+   
     // Variables para control de conexión
     let lastMessageTime = 0;
     let timeoutTimer;
@@ -32,17 +24,13 @@
 
     // Elementos del DOM
     const wifiElement = document.getElementById("wifi");
-    //const estadoElement = document.getElementById("estado");
     const tiempoElement = document.getElementById("tiempo");
-    
-    //const tempElement = document.getElementById("temp");
-    //const humElement = document.getElementById("hum");
-    //const tiemElement = document.getElementById("tiem");
 
-    //const temperatureElement = document.getElementById("temperature");
-    //const humidityElement = document.getElementById("humidity");
-    //const nivelAguaElement = document.getElementById("nivelAgua");
-    
+
+    const tempFij = document.getElementById("temp");
+    const humFij = document.getElementById("hum");
+    const tiemFij = document.getElementById("tiem");
+
     // Configuración cliente MQTT
     const clientId = "web_" + parseInt(Math.random() * 100, 10);
     const client = new Paho.Client(broker, port, clientId);
@@ -75,16 +63,15 @@
         updateConnectionStatus(false);
         clearInterval(timeoutTimer);
     }
-/*
+
     function onMessageArrived(message) {
         try {
             const data = JSON.parse(message.payloadString);
             updateUI(data);
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            
-            tempFij.textContent = data.estado;
-            humFij.textContent = data.estado;
-            tiemFij.textContent = data.estado;
+            tempFij.textContent = data.temp;
+            humFij.textContent = data.hum;
+            tiemFij.textContent = data.tres;
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
             console.log("Datos actualizados:", data);
@@ -93,7 +80,7 @@
    //     }
    // }
    */     
-
+/*
     function onMessageArrived (message) {
     try {
         const data = JSON.parse(message.payloadString);
@@ -108,7 +95,7 @@
         console.error("Error al procesar mensaje:", error);
     }
 };
-
+*/
     function checkConnection() {
         const currentTime = Date.now();
         if (currentTime - lastMessageTime > timeoutDuration) {
@@ -121,9 +108,6 @@
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
             conexion= 1 ; 
-            //document.getElementById("temp").textContent=tempFij;
-            //document.getElementById("hum").textContent=humFij;
-            //document.getElementById("tiem").textContent=tiemFij;
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
@@ -137,13 +121,7 @@
     function updateUI(data) {
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
-        conexion= 1 ; 
-       //document.getElementById("temp").textContent=tempFij;
-       //document.getElementById("hum").textContent=humFij;
-        //document.getElementById("tiem").textContent=tiemFij;
-        //temperatureElement.textContent = data.temperatura;
-        //humidityElement.textContent = data.humedad;
-        //nivelAguaElement.textContent = data.nivelAgua;
+        conexion= 1 ;  
     }
 
     // ========== FUNCIONES DE CONFIGURACIÓN ==========
@@ -175,33 +153,34 @@
         const minutes = parseInt(document.getElementById('tiempo').value) || 0;
         document.getElementById('time-display').textContent = `Equivalente: ${formatMinutes(minutes)}`;
     }
-
-    //function mostrarUltimoValor() {
-    //    const container = document.getElementById('ultimo-valor-content');
+/*
+    function mostrarUltimoValor() {
+        const container = document.getElementById('ultimo-valor-content');
         
-    //  if (!ultimoValorCargado) {
-    //        container.innerHTML = '<div class="no-valor">No se han cargado valores aún</div>';
-    //        return;
-    //    }
+      if (!ultimoValorCargado) {
+            container.innerHTML = '<div class="no-valor">No se han cargado valores aún</div>';
+            return;
+        }
         
-    //    const fecha = new Date(ultimoValorCargado.timestamp || ultimoValorCargado.fecha);
+        const fecha = new Date(ultimoValorCargado.timestamp || ultimoValorCargado.fecha);
         
-    //    container.innerHTML = `
-    //      <div class="ultimo-valor-item">
-    //         <div class="ultimo-valor-label">Temperatura</div>
-    //            <div class="ultimo-valor-dato" id="temp">°C</div>
-    //        </div>
-    //        <div class="ultimo-valor-item">
-    //            <div class="ultimo-valor-label">Humedad</div>
-    //            <div class="ultimo-valor-dato" id="hum">%</div>
-    //        </div>
-    //        <div class="ultimo-valor-item">
-    //            <div class="ultimo-valor-label">Tiempo</div>
-    //            <div class="ultimo-valor-dato" id="tiempo">min</div>
-    //        </div>
-    //                `;
-    //}
-// <div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
+        container.innerHTML = `
+          <div class="ultimo-valor-item">
+             <div class="ultimo-valor-label">Temperatura</div>
+                <div class="ultimo-valor-dato" id="temp">°C</div>
+            </div>
+            <div class="ultimo-valor-item">
+                <div class="ultimo-valor-label">Humedad</div>
+                <div class="ultimo-valor-dato" id="hum">%</div>
+            </div>
+            <div class="ultimo-valor-item">
+                <div class="ultimo-valor-label">Tiempo</div>
+                <div class="ultimo-valor-dato" id="tiempo">min</div>
+            </div>
+                    `;
+    }
+<div class="ultimo-valor-fecha">Cargado: ${formatFecha(fecha)}</div>
+*/
     function actualizarVariablesConfiguracion() {
         configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
         configHumedad = parseInt(document.getElementById('humedad').value) || valoresPorDefecto.humedad;
