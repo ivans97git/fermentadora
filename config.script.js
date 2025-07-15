@@ -17,9 +17,9 @@
     let configHumedad = valoresPorDefecto.humedad;
     let configTiempo = valoresPorDefecto.tiempo;
     
-    let tempFij ;
-    let humFij ;
-    let tiemFij ;
+    let tempFij= 2;
+    let humFij= 2;
+    let tiemFij= 2 ;
 
     document.getElementById("temp").textContent=tempFij;
     document.getElementById("hum").textContent=humFij;
