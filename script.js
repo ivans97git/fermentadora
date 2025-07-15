@@ -14,6 +14,8 @@ const temperatureElement = document.getElementById("temperature");
 const humidityElement = document.getElementById("humidity");
 const nivelAguaElement = document.getElementById("nivelAgua");
 const tiempoRestElement = document.getElementById("tiempoRes");
+const mensajeElement = document.getElementById("mensaje");
+const mensajecElement = document.getElementById("mensajec");
 
 // Variables para control de tiempo
 let lastMessageTime = 0;
@@ -36,6 +38,8 @@ function checkConnection() {
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
         tiempoRestElement.textContent = "--";
+        mensajeElement.textContent = "--";
+        mensajecElement.style.backgroundColor = "#E0E0E0";
         conexion = 0;
     }
 }
@@ -51,6 +55,8 @@ client.onConnectionLost = (response) => {
     humidityElement.textContent = "--";
     nivelAguaElement.textContent = "--";
     tiempoRestElement.textContent = "--";
+    mensajeElement.textContent = "--";
+    mensajecElement.style.backgroundColor = "#E0E0E0";
     conexion= 0;
     clearInterval(timeoutTimer);
 };
@@ -65,6 +71,10 @@ client.onMessageArrived = (message) => {
         humidityElement.textContent = data.humedad;
         nivelAguaElement.textContent = data.nivelAgua;
         tiempoRestElement.textContent = data.tres;
+        mensajeElement.textContent = data.mensaje;
+        mensajeElement.style.color = "#FFFFFF";
+        mensajecElement.style.backgroundColor = "#1E2460";
+        
         conexion= 1;
         if (data.estado === "1") {
         estadoElement.textContent = "OPERATIVA";
@@ -108,6 +118,8 @@ const options = {
         humidityElement.textContent = "--";
         nivelAguaElement.textContent = "--";
         tiempoRestElement.textContent = "--";
+        mensajeElement.textContent = "--";
+        mensajecElement.style.backgroundColor = "#E0E0E0";
         conexion= 0;
     }
 };
