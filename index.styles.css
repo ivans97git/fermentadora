@@ -133,6 +133,20 @@ footer {
     margin-left: 3px;
 }
 
+.mensaje-maquina {
+    background-color: #e0e0e0;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mensaje-texto {
+    font-weight: bold;
+}
+
 .estado-maquina {
     background-color: #e0e0e0;
     padding: 15px;
