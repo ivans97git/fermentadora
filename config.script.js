@@ -197,7 +197,7 @@
 
     function cargarConfiguracion() {
         
-            if (conexion = 0) {
+            if (conexion === 0) {
             alert(`La fermentadora no esta conectada.\n Verifique la conexión.`);
             }
             else {                   
