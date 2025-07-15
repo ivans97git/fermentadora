@@ -64,11 +64,12 @@
         clearInterval(timeoutTimer);
     }
 
+/*
     function onMessageArrived(message) {
         try {
             const data = JSON.parse(message.payloadString);
             updateUI(data);
-            estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
+            wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
             tempFij.textContent = data.temp;
             humFij.textContent = data.hum;
             tiemFij.textContent = data.tres;
@@ -77,13 +78,14 @@
             console.log("Datos actualizados:", data);
         } catch (error) {
             console.error("Error al procesar mensaje:", error);
-   //     }
-   // }
-   */     
-/*
+         }
+       }
+*/        
+
     function onMessageArrived (message) {
     try {
         const data = JSON.parse(message.payloadString);
+        wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
         tempFij.textContent = data.estado;
         humFij.textContent = data.estado;
         tiemFij.textContent = data.estado;
@@ -95,7 +97,7 @@
         console.error("Error al procesar mensaje:", error);
     }
 };
-*/
+
     function checkConnection() {
         const currentTime = Date.now();
         if (currentTime - lastMessageTime > timeoutDuration) {
