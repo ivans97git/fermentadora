@@ -4,7 +4,7 @@
     const topic = "casa/sensores";
     const topicConfiguracion = "casa/config";    // Tópico para enviar configuración al ESP32
     const timeoutDuration = 10000; // 10 segundos sin mensajes = desconectado
-    let conexion= 0 ; 
+    let conexion = 0 ; 
     // Valores por defecto
     const valoresPorDefecto = {
         temperatura: 30,
@@ -74,7 +74,7 @@
         tempFij.textContent = data.temp;
         humFij.textContent = data.hum;
         tiemFij.textContent = data.tiempo;
-        conexión = 1;
+        conexion = 1;
         // Actualizar el tiempo del último mensaje
         lastMessageTime = Date.now();
         console.log("Datos actualizados:", data);
@@ -94,11 +94,11 @@
         if (connected) {
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
-            conexion= 1 ; 
+            conexion = 1 ; 
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
-            conexion= 0 ; 
+            conexion = 0 ; 
             document.getElementById("temp").textContent="--";
             document.getElementById("hum").textContent="--";
             document.getElementById("tiem").textContent="--";
@@ -108,7 +108,7 @@
     function updateUI(data) {
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
-        conexion= 1 ;  
+        conexion = 1 ;  
     }
 
     // ========== FUNCIONES DE CONFIGURACIÓN ==========
