@@ -94,9 +94,9 @@
             const data = JSON.parse(message.payloadString);
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
             
-            tempFij.textContent = data.temp;
-            humFij.textContent = data.hum;
-            tiemFij.textContent = data.tres;
+            tempFij.textContent = data.estado;
+            humFij.textContent = data.estado;
+            tiemFij.textContent = data.estado;
             
             //tempFij = data.temp ;
             //humFij = data.hum ;
