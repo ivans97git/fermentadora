@@ -86,9 +86,9 @@
     try {
         const data = JSON.parse(message.payloadString);
         wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-        tempFij.textContent = data.estado;
-        humFij.textContent = data.estado;
-        tiemFij.textContent = data.estado;
+        tempFij.textContent = data.temp;
+        humFij.textContent = data.hum;
+        tiemFij.textContent = data.tres;
         
         // Actualizar el tiempo del último mensaje
         lastMessageTime = Date.now();
