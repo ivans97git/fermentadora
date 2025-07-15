@@ -96,10 +96,9 @@
             //let tempFij = data.temp;
             //let humFij = data.hum;
             //let tiemFij = data.tres;
-            tempFij=data.temp ;
-            humFij=data.hum ;
-            tiemFij=data.tres ;
-            console.log(tempFij,humFij,tiemFij);
+            let tempFij=data.temp ;
+            let humFij=data.hum ;
+            let tiemFij=data.tres ;
             //tempElement.textContent = tempFij;
             //humElement.textContent = humFij;
             //tiemElement.textContent = tiemFij;
