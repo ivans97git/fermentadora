@@ -196,7 +196,8 @@
     }
 
     function cargarConfiguracion() {
-        if (conexion= 1) {
+        
+        if (conexion = 1) {
             // Actualizar las variables primero
             actualizarVariablesConfiguracion();
         
