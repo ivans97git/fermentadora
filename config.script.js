@@ -197,7 +197,10 @@
 
     function cargarConfiguracion() {
         
-        if (conexion = 1) {
+            if (conexion = 0) {
+            alert(`La fermentadora no esta conectada.\n Verifique la conexión.`);
+            }
+            else {                   
             // Actualizar las variables primero
             actualizarVariablesConfiguracion();
         
@@ -220,11 +223,8 @@
             ultimoValorCargado = configuracion;
             //localStorage.setItem('ultimoValorFermentadora', JSON.stringify(ultimoValorCargado));
             //mostrarUltimoValor();
+            }
         }
-        else {
-            alert(`La fermentadora no esta conectada.\n Verifique la conexión.`);
-        }
-    }
 
     // ========== INICIALIZACIÓN ==========
     // Asignar handlers MQTT
