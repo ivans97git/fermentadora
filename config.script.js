@@ -86,6 +86,7 @@
     try {
         const data = JSON.parse(message.payloadString);
         wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
+        wifiElement.style.color = "#4CAF50";
         tempFij.textContent = data.temp;
         humFij.textContent = data.hum;
         tiemFij.textContent = data.tiempo;
