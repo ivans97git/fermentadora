@@ -80,7 +80,11 @@
         try {
             const data = JSON.parse(message.payloadString);
             updateUI(data);
+            estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
             
+            tempFij.textContent = data.estado;
+            humFij.textContent = data.estado;
+            tiemFij.textContent = data.estado;
             // Actualizar el tiempo del último mensaje
             lastMessageTime = Date.now();
             console.log("Datos actualizados:", data);
