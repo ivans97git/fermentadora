@@ -19,7 +19,7 @@ const mensajecElement = document.getElementById("mensajec");
 
 // Variables para control de tiempo
 let lastMessageTime = 0;
-const timeoutDuration = 10000; // 10 segundos sin mensajes = desconectado
+const timeoutDuration = 3000; // 10 segundos sin mensajes = desconectado
 let timeoutTimer;
 
 // Cliente MQTT
