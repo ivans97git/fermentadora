@@ -94,7 +94,7 @@
    // }
    */     
 
-    function onMessageArrived = (message) => {
+    function onMessageArrived (message) {
     try {
         const data = JSON.parse(message.payloadString);
         tempFij.textContent = data.estado;
