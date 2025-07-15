@@ -17,13 +17,13 @@
     let configHumedad = valoresPorDefecto.humedad;
     let configTiempo = valoresPorDefecto.tiempo;
     
-    let tempFij= 2;
-    let humFij= 2;
-    let tiemFij= 2 ;
+    //let tempFij= 2;
+    //let humFij= 2;
+    //let tiemFij= 2 ;
 
-    document.getElementById("temp").textContent=tempFij;
-    document.getElementById("hum").textContent=humFij;
-    document.getElementById("tiem").textContent=tiemFij;
+    const tempFij = document.getElementById("temp");
+    const humFij = document.getElementById("hum");
+    const tiemFij = document.getElementById("tiem");
 
     // Variables para control de conexión
     let lastMessageTime = 0;
@@ -93,12 +93,14 @@
         try {
             const data = JSON.parse(message.payloadString);
             estadoElement.textContent = data.estado // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
-            //let tempFij = data.temp;
-            //let humFij = data.hum;
-            //let tiemFij = data.tres;
-            let tempFij=data.temp ;
-            let humFij=data.hum ;
-            let tiemFij=data.tres ;
+            
+            tempFij.textContent = data.temp;
+            humFij.textContent = data.hum;
+            tiemFij.textContent = data.tres;
+            
+            //tempFij = data.temp ;
+            //humFij = data.hum ;
+            //tiemFij = data.tres ;
             //tempElement.textContent = tempFij;
             //humElement.textContent = humFij;
             //tiemElement.textContent = tiemFij;
@@ -122,9 +124,9 @@
             wifiElement.textContent = "CONECTADA";
             wifiElement.style.color = "#4CAF50";
             conexion= 1 ; 
-            document.getElementById("temp").textContent=tempFij;
-            document.getElementById("hum").textContent=humFij;
-            document.getElementById("tiem").textContent=tiemFij;
+            //document.getElementById("temp").textContent=tempFij;
+            //document.getElementById("hum").textContent=humFij;
+            //document.getElementById("tiem").textContent=tiemFij;
         } else {
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
@@ -139,9 +141,9 @@
         wifiElement.textContent = data.wifi || "CONECTADA";
         wifiElement.style.color = "#4CAF50";
         conexion= 1 ; 
-       document.getElementById("temp").textContent=tempFij;
-        document.getElementById("hum").textContent=humFij;
-        document.getElementById("tiem").textContent=tiemFij;
+       //document.getElementById("temp").textContent=tempFij;
+       //document.getElementById("hum").textContent=humFij;
+        //document.getElementById("tiem").textContent=tiemFij;
         //temperatureElement.textContent = data.temperatura;
         //humidityElement.textContent = data.humedad;
         //nivelAguaElement.textContent = data.nivelAgua;
