@@ -27,7 +27,7 @@
     const tiempoElement = document.getElementById("tiempo");
 
 
-    const tempFij = document.getElementById("temp");
+    //const tempFij = document.getElementById("temp");
     const humFij = document.getElementById("hum");
     const tiemFij = document.getElementById("tiem");
 
@@ -71,7 +71,7 @@
         const data = JSON.parse(message.payloadString);
         wifiElement.textContent = data.wifi // || "CONECTADA"; // Si no viene wifi, mostrar "conectada"
         wifiElement.style.color = "#4CAF50";
-        tempFij.textContent = data.temp;
+        //tempFij.textContent = data.temp;
         humFij.textContent = data.hum;
         tiemFij.textContent = data.tiempo;
         conexion = 1;
@@ -99,7 +99,7 @@
             wifiElement.textContent = "DESCONECTADA";  
             wifiElement.style.color = "#F44336";
             conexion = 0 ; 
-            document.getElementById("temp").textContent="--";
+            //document.getElementById("temp").textContent="--";
             document.getElementById("hum").textContent="--";
             document.getElementById("tiem").textContent="--";
         }
@@ -142,12 +142,12 @@
     }
 
     function actualizarVariablesConfiguracion() {
-        configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
+        //configTemperatura = parseFloat(document.getElementById('temperatura').value) || valoresPorDefecto.temperatura;
         configHumedad = parseInt(document.getElementById('humedad').value) || valoresPorDefecto.humedad;
         configTiempo = parseInt(document.getElementById('tiempo').value) || valoresPorDefecto.tiempo;
         
         console.log('Variables actualizadas:', {
-            temperatura: configTemperatura,
+            //temperatura: configTemperatura,
             humedad: configHumedad,
             tiempo: configTiempo
         });
@@ -164,7 +164,7 @@
         
             // Crear objeto con la configuración
             const configuracion = {
-            temperatura: configTemperatura,
+            //temperatura: configTemperatura,
             humedad: configHumedad,
             tiempo: configTiempo,          
             };
@@ -194,13 +194,13 @@
 
     // Event listeners
     document.getElementById('tiempo').addEventListener('input', updateTimeDisplay);
-    document.getElementById('temperatura').addEventListener('change', actualizarVariablesConfiguracion);
+    //document.getElementById('temperatura').addEventListener('change', actualizarVariablesConfiguracion);
     document.getElementById('humedad').addEventListener('change', actualizarVariablesConfiguracion);
     document.getElementById('tiempo').addEventListener('change', actualizarVariablesConfiguracion);
     document.getElementById('cargar').addEventListener('click', cargarConfiguracion);
 
     document.getElementById('borrar').addEventListener('click', function() {
-        document.getElementById('temperatura').value = valoresPorDefecto.temperatura;
+        //document.getElementById('temperatura').value = valoresPorDefecto.temperatura;
         document.getElementById('humedad').value = valoresPorDefecto.humedad;
         document.getElementById('tiempo').value = valoresPorDefecto.tiempo;
         updateTimeDisplay();
